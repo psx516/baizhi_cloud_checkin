@@ -36,12 +36,12 @@ jobs:
           COOKIE_JSON: ${{ secrets.COOKIE_JSON }}
         run: node checkin.js
 
-      - name: 📸 上传截图 (如果有)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: checkin-screenshots
-          path: |
-            debug-screenshot.png
-            error-screenshot.png
-          if-no-files-found: ignore
+     # - name: 📸 上传截图 (如果有)
+      #  if: always()
+       # uses: actions/upload-artifact@v4
+       # with:
+       #   name: checkin-screenshots
+       #   path: |
+       #     debug-screenshot.png
+       #     error-screenshot.png
+       #   if-no-files-found: ignore

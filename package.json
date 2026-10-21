@@ -1,0 +1,16 @@
+{
+  "name": "baizhi-cloud-checkin",
+  "version": "1.0.0",
+  "description": "百智云 (baizhi.cloud) 每日自动签到脚本 - 基于 Playwright + GitHub Actions",
+  "main": "checkin.js",
+  "scripts": {
+    "checkin": "node checkin.js",
+    "install:browser": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.50.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,47 @@
+name: 百智云每日签到
+
+on:
+  schedule:
+    # 每天 UTC 16:10 = 北京时间 00:10 (零点刚过就签到)
+    - cron: "10 16 * * *"
+  workflow_dispatch: # 支持手动触发
+
+jobs:
+  checkin:
+    name: 自动签到
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: 📥 检出代码
+        uses: actions/checkout@v4
+
+      - name: 🟢 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 📦 安装依赖
+        run: npm ci --include=dev 2>/dev/null || npm install
+
+      - name: 🌐 安装 Playwright Chromium
+        run: npx playwright install chromium
+
+      - name: 🔧 修复浏览器依赖
+        run: npx playwright install-deps chromium
+
+      - name: ✅ 执行签到
+        env:
+          COOKIE_STRING: ${{ secrets.COOKIE_STRING }}
+          COOKIE_JSON: ${{ secrets.COOKIE_JSON }}
+        run: node checkin.js
+
+      - name: 📸 上传截图 (如果有)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkin-screenshots
+          path: |
+            debug-screenshot.png
+            error-screenshot.png
+          if-no-files-found: ignore

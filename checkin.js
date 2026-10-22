@@ -166,7 +166,7 @@ async function checkinCore() {
       result.errorMessage = "Cookie 已失效，被重定向到登录页";
       console.error(`❌ ${result.errorMessage}。请重新登录并更新 Cookie。`);
       exitCode = 2;
-      return;
+      return { result, exitCode };
     }
 
     console.log("✅ 登录状态验证通过");
@@ -192,7 +192,7 @@ async function checkinCore() {
         result.balanceAfter = (await bEl.textContent()) || "";
       } catch {}
       exitCode = 0;
-      return;
+      return { result, exitCode };
     }
 
     console.log("🎯 发现签到按钮，准备点击...");

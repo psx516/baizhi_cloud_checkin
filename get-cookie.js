@@ -63,13 +63,20 @@ async function main() {
   fs.writeFileSync("cookies.json", JSON.stringify(storageState.cookies, null, 2));
   console.log("✅ Cookie 已保存到 cookies.json");
 
-  // 同时输出到剪贴板格式提示
-  console.log("\n📋 在 GitHub Actions 中使用:");
-  console.log("1. 打开 https://github.com/<你的用户名>/baizhiyunqd/settings/secrets/actions");
-  console.log("2. 点击 New repository secret");
-  console.log("3. Name 填: COOKIE_JSON");
-  console.log("4. Value 填: cookies.json 文件的完整内容");
-  console.log("5. 点击 Add secret");
+  console.log("\n📋 GitHub Actions 需要配置 2 个 Secrets:");
+  console.log("");
+  console.log("  https://github.com/<你的仓库>/settings/secrets/actions");
+  console.log("");
+  console.log("  ┌─ COOKIE_JSON ── cookie 认证 ─────────────────────────┐");
+  console.log("  │  Value: cookies.json 的完整内容                       │");
+  console.log("  └──────────────────────────────────────────────────────┘");
+  console.log("");
+  console.log("  ┌─ MEOW_USERID ── MeoW 推送昵称 (可选) ────────────────┐");
+  console.log("  │  先在 https://www.chuckfang.com/ 注册拿到昵称         │");
+  console.log("  │  不填则跳过推送，脚本照常签到                          │");
+  console.log("  └──────────────────────────────────────────────────────┘");
+  console.log("");
+  console.log("配置完成后，推送到 GitHub Actions 会每天自动执行 ✨");
 
   await browser.close();
 }

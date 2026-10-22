@@ -34,6 +34,9 @@ jobs:
         env:
           COOKIE_STRING: ${{ secrets.COOKIE_STRING }}
           COOKIE_JSON: ${{ secrets.COOKIE_JSON }}
+          # MeoW 推送昵称，在 https://www.chuckfang.com/ 注册后填写
+          # 不设置则跳过推送
+          MEOW_USERID: ${{ secrets.MEOW_USERID }}
         run: node checkin.js
 
       - name: 📸 上传截图 (如果有)
